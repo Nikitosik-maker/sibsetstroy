@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сибсетьстрой</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Rubik', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+      color: #2e3b55;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    header {
+      background: #ffffff;
+      color: #2e3b55;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    header p {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #007acc;
+    }
+    nav {
+      background: #e5eaf1;
+      padding: 12px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav a {
+      color: #2e3b55;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #007acc;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: none;
+    }
+    h2 {
+      color: #1c2535;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 2rem;
+      text-align: center;
+    }
+    #about p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .tech-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .tech-item {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .tech-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,122,204,0.3);
+    }
+    .tech-item img {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .tech-item p {
+      font-weight: 600;
+      color: #007acc;
+      font-size: 1rem;
+      margin: 0;
+    }
+    #projects ul {
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 20px;
+      font-size: 1.05rem;
+      color: #3a456b;
+    }
+    #projects ul li {
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    #contact p {
+      max-width: 600px;
+      margin: 0 auto 25px auto;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #007acc;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    form input, form textarea {
+      font-size: 16px;
+      padding: 12px 15px;
+      border: 2px solid #007acc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      width: 100%;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+      font-family: 'Rubik', sans-serif;
+    }
+    form input:focus, form textarea:focus {
+      border-color: #005fa3;
+      box-shadow: 0 0 8px #007acc88;
+      outline: none;
+    }
+    form button {
+      background: linear-gradient(45deg, #007acc, #00c6ff);
+      color: white;
+      font-weight: 700;
+      padding: 15px 40px;
+      border-radius: 12px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      transition: background 0.4s ease;
+      box-shadow: 0 4px 12px rgba(0,122,204,0.5);
+    }
+    form button:hover {
+      background: linear-gradient(45deg, #005fa3, #0088cc);
+      box-shadow: 0 0 20px #00aaffcc;
+    }
+    footer {
+      background: #2e3b55;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+    .contacts-bottom {
+      background: #f0f4f9;
+      color: #2e3b55;
+      text-align: center;
+      font-size: 1.05rem;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 20px auto 40px auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .contacts-bottom a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contacts-bottom a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      nav a {
+        margin: 0 10px;
+        font-size: 1rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      #about p, #projects ul {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ООО «Сибсетьстрой»</h1>
+    <p>Бестраншейная укладка коммуникаций по всей России — газ, вода, канализация, электросети.</p>
+  </header>
+
+  <nav>
+    <a href="#about">О нас</a>
+    <a href="#tech">Техника</a>
+    <a href="#projects">Проекты</a>
+    <a href="#contact">Контакты</a>
+  </nav>
+
+  <section id="about">
+    <h2>О компании</h2>
+    <p>
+      Компания «Сибсетьстрой» — ваш надёжный партнёр в бестраншейной укладке коммуникаций.  
+      Современные технологии, опыт более 15 лет и работа по всей России.  
+      Мы прокладываем газ, воду, канализацию и электросети с максимальной эффективностью и минимальными затратами.
+    </p>
+  </section>
+
+  <section id="tech">
+    <h2>Наша техника</h2>
+    <div class="tech-gallery">
+      <div class="tech-item">
+        <img src="images/xcmg360e.jpg" alt="XCMG 360E" />
+        <p>Установка ГНБ XCMG 360E</p>
+      </div>
+      <div class="tech-item">
+        <img src="images/xcmg230e.jpg" alt="XCMG 230E" />
+        <p>Установка ГНБ XCMG 230E</p>
+      </div>
+      <div class="tech-item">
+        <img src="images/vermeer36x50.jpg" alt="Vermeer 36x50" />
+        <p>Установка ГНБ Vermeer 36x50</p>
+      </div>
+      <div class="tech-item">
+        <img src="images/doosan190.jpg" alt="Doosan 190" />
+        <p>Экскаватор Doosan 190</p>
+      </div>
+      <div class="tech-item">
+        <img src="images/doosan210.jpg" alt="Doosan 210" />
+        <p>Экскаватор Doosan 210</p>
+      </div>
+      <div class="tech-item">
+        <img src="images/jcb3cx.jpg" alt="JCB 3CX" />
+        <p>Экскаватор-погрузчик JCB 3CX</p>
+      </div>
+      <div class="tech-item">
+        <img src="images/kamaz43118.jpg" alt="Камаз 43118" />
+        <p>Камаз 43118</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Наши проекты</h2>
+    <ul>
+      <li>Наружные сети водоснабжения на объекте: «Freedom Village»</li>
+      <li>Водоснабжение и газоснабжение жилого комплекса: «Олимпик Парк»</li>
+      <li>Строительство магистральных канализационных трубопроводов на территории ТЭЦ</li>
+      <li>Прокладка кабельных линий электропередач для нескольких промышленных зон</li>
+      <li>Монтаж газопровода средней и низкой давления в городской черте</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Свяжитесь с нами</h2>
+    <p>
+      Есть проект или вопрос? Оставьте заявку — мы быстро свяжемся и предложим лучшее решение!
+    </p>
+    <form action="https://getform.io/f/bxoyrwya" method="POST">
+      <input type="text" id="name" name="name" placeholder="Ваше имя" required />
+      <input type="tel" id="phone" name="phone" placeholder="Телефон" required />
+      <textarea id="message" name="message" rows="4" placeholder="Сообщение или описание задачи" required></textarea>
+      <button type="submit">Отправить заявку</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 ООО «Сибсетьстрой». Все права защищены.
+  </footer>
+
+  <div class="contacts-bottom">
+    <p>Почта: <a href="mailto:sibsetstroy@yandex.ru">sibsetstroy@yandex.ru</a> | Телефон: <a href="tel:+79833115046">+7 (983) 311-50-46</a></p>
+  </div>
+
+  <script>
+    // Анимация появления секций при скролле
+    const sections = document.querySelectorAll('section');
+    const options = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
